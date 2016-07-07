@@ -18,10 +18,11 @@ The scripts should be run in the following order. The input for these scripts is
 ## Other required programs
 
 Programs called by the scripts in 1\_Sequence\_processing\_and\_OTU\_picking/
-	flash/1.2.7
-	fastx_toolkit/0.0.13
-	bowtie/2.2.1
-	usearch/7.0.1090 -OR- uclust/1.2.22
-	mafft (v7.029b)
-	fasttree/2.1.4
-	RDPTools/140616
+
+- flash/1.2.7
+- fastx_toolkit/0.0.13
+- bowtie/2.2.1
+- usearch/7.0.1090 -OR- uclust/1.2.22
+- mafft (v7.029b)
+- fasttree/2.1.4
+- RDPTools/140616
