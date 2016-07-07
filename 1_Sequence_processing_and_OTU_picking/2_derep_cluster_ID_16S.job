@@ -14,7 +14,11 @@
 ### This script requires you to have run assemble_filter_cat_16S.job on this same data
 
 ### Auxillary scripts and programs
+# bowtie/2.2.1
+# usearch/7.0.1090 -OR- uclust/1.2.22
 # mafft (v7.029b)
+# fasttree/2.1.4
+# RDPTools/140616
 # uniq_16S.pl
 # usearch7_relabel_otus.pl
 # build_otu_table.pl

@@ -17,6 +17,8 @@
 #     (where sample_name is the sample ID not containing any -'s or .'s)
 
 ### Auxillary scripts and programs
+# flash/1.2.7
+# fastx_toolkit/0.0.13
 # batch_rename.sh
 # simple_fq2fa.pl
 
