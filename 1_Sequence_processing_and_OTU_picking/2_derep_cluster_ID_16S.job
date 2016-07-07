@@ -21,7 +21,7 @@
 # join_multi-lined_fasta.pl
 # rdp_tax2phyloseq_tax_nosupp.pl
 
-###### Which clustering tool would you like to use (uclust/usearch)? ######
+###### Which clustering tool would you like to use? ######
 clusterTool=usearch
 
 ###### Include singletons by matching them back to clusters formed without them ("yes" or "no")? ######
