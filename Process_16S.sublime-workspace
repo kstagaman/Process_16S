@@ -1,0 +1,1109 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"use",
+				"useChimeraLibary"
+			],
+			[
+				"deho",
+				"deHostUnderName"
+			],
+			[
+				"single",
+				"singles_id"
+			],
+			[
+				"print",
+				"print_unmatched"
+			],
+			[
+				"proce",
+				"process_16S_uniqAll_uclust_chooseSort"
+			],
+			[
+				"med",
+				"medianTrailingGapLen"
+			],
+			[
+				"sor",
+				"sortedTrailingGapLens"
+			],
+			[
+				"sorte",
+				"sortedLeadingGapLens"
+			],
+			[
+				"trail",
+				"trailingGapLens"
+			],
+			[
+				"lead",
+				"leadingGapLens"
+			],
+			[
+				"leadin",
+				"leadingGapLens"
+			],
+			[
+				"leand",
+				"leadingGapLens"
+			],
+			[
+				"uclust",
+				"uclust_library"
+			],
+			[
+				"handle",
+				"handleCounts"
+			],
+			[
+				"no",
+				"nozf_outDir"
+			],
+			[
+				"bo",
+				"bowtie_db"
+			],
+			[
+				"ucl",
+				"uclust_library"
+			],
+			[
+				"fasttre",
+				"fasttree_log"
+			],
+			[
+				"join",
+				"join_multi-lined_fasta"
+			],
+			[
+				"job",
+				"jobName"
+			],
+			[
+				"maf",
+				"mafft_threads"
+			],
+			[
+				"maff",
+				"mafft_extend"
+			],
+			[
+				"uclu",
+				"uclust_outDir"
+			],
+			[
+				"concat",
+				"concatName"
+			],
+			[
+				"qual",
+				"qual_outDir"
+			],
+			[
+				"get",
+				"get_taxon_otus"
+			],
+			[
+				"uniq_seq",
+				"uniq_seq_by_id"
+			],
+			[
+				"smpls",
+				"smplseqs_w_counts"
+			],
+			[
+				"smplseq",
+				"smplseq_counts"
+			],
+			[
+				"fasta",
+				"fastaFile"
+			],
+			[
+				"ge",
+				"genus_sup"
+			],
+			[
+				"fam",
+				"family_sup"
+			],
+			[
+				"ord",
+				"order_sup"
+			],
+			[
+				"subcla",
+				"subclass_sup"
+			],
+			[
+				"cla",
+				"class_sup"
+			],
+			[
+				"phylu",
+				"phylum_sup"
+			],
+			[
+				"dom",
+				"domain_sup"
+			],
+			[
+				"out",
+				"outName"
+			],
+			[
+				"headerMatch",
+				"headerMatch1"
+			],
+			[
+				"taxon",
+				"taxon_abunds"
+			],
+			[
+				"seq",
+				"seqIDs_by_smpl"
+			],
+			[
+				"seeds",
+				"seeds_by_seqIDs"
+			],
+			[
+				"cluster",
+				"clusterID_by_seed"
+			],
+			[
+				"clus",
+				"clusterID"
+			],
+			[
+				"abudn",
+				"abunds_by_seqID"
+			],
+			[
+				"read1",
+				"read1"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"best",
+				"bestMatchSmpl"
+			],
+			[
+				"bestBc2ma",
+				"bestBc2matchDist"
+			],
+			[
+				"expB",
+				"expBc1s"
+			],
+			[
+				"exp",
+				"expBc2s"
+			],
+			[
+				"unma",
+				"unmatched_barcode_counts"
+			],
+			[
+				"unmatch",
+				"unmatched_barcode"
+			],
+			[
+				"t",
+				"t"
+			],
+			[
+				"file",
+				"fileHandles"
+			],
+			[
+				"line_count",
+				"line_counts"
+			],
+			[
+				"gene",
+				"gene_strt"
+			],
+			[
+				"recomb_ln",
+				"recomb_len_total"
+			],
+			[
+				"recomb",
+				"recomb_count"
+			],
+			[
+				"jsegs",
+				"jsegs_strt_stop"
+			],
+			[
+				"rev_primer",
+				"rev_primer_strt"
+			],
+			[
+				"rev",
+				"rev_primer_len"
+			],
+			[
+				"vsegs",
+				"vsegs_strt_stop"
+			],
+			[
+				"matched",
+				"matched_seq"
+			],
+			[
+				"comp",
+				"compared_subseqs"
+			],
+			[
+				"compared",
+				"compared_seq"
+			],
+			[
+				"ESPN",
+				"ESPN_poll_names"
+			],
+			[
+				"gam",
+				"game_scores"
+			],
+			[
+				"team",
+				"team_scores"
+			],
+			[
+				"all",
+				"all_smpl_perms"
+			],
+			[
+				"sorted",
+				"sorted_all_totalDiffs"
+			],
+			[
+				"perm",
+				"perm_bestComparisons_name"
+			],
+			[
+				"perm_",
+				"perm_totalDiffs"
+			],
+			[
+				"sort",
+				"sortedComps"
+			],
+			[
+				"bestComp",
+				"bestComparison"
+			],
+			[
+				"v",
+				"vquest_assignments"
+			],
+			[
+				"vquest",
+				"vquest_assignments"
+			],
+			[
+				"GNS",
+				"GNS"
+			],
+			[
+				"before",
+				"before_flank"
+			],
+			[
+				"genom",
+				"genomic_stop"
+			],
+			[
+				"gen",
+				"genomic_strt"
+			],
+			[
+				"gene_strt",
+				"gene_strt_stop"
+			],
+			[
+				"abun",
+				"abunds_by_seq"
+			],
+			[
+				"pre",
+				"preVseq"
+			],
+			[
+				"uniq",
+				"uniqPreVseqs"
+			],
+			[
+				"preV",
+				"preVseqs"
+			],
+			[
+				"OUT",
+				"OUT"
+			],
+			[
+				"p5",
+				"p5regex"
+			],
+			[
+				"medInd",
+				"medIndex1"
+			],
+			[
+				"max",
+				"maxLength"
+			],
+			[
+				"min",
+				"minLength"
+			],
+			[
+				"random",
+				"random_seqs"
+			],
+			[
+				"smpl",
+				"smpl_assigns"
+			],
+			[
+				"stop",
+				"stop"
+			],
+			[
+				"start",
+				"starts"
+			],
+			[
+				"sec",
+				"second_order"
+			],
+			[
+				"fir",
+				"first_shuffle_log"
+			],
+			[
+				"secon",
+				"second_shuffle"
+			],
+			[
+				"sdha",
+				"sdha_ct"
+			],
+			[
+				"sigm",
+				"sigm_ct1"
+			],
+			[
+				"blast",
+				"blast_results"
+			],
+			[
+				"curr",
+				"curr_rep_seq"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"clas",
+				"class_seqs"
+			],
+			[
+				"gen_",
+				"gen_seq_ids"
+			],
+			[
+				"sam_",
+				"sam_1ids"
+			],
+			[
+				"sam",
+				"same"
+			],
+			[
+				"ig",
+				"ig_ids"
+			],
+			[
+				"conv",
+				"conversion_headers"
+			],
+			[
+				"ksize_hea",
+				"ksize_headers"
+			],
+			[
+				"ks",
+				"ksize_headers"
+			],
+			[
+				"match",
+				"match_headers"
+			],
+			[
+				"ksize",
+				"ksize_header"
+			],
+			[
+				"if",
+				"ife	Conditional if..else"
+			],
+			[
+				"taxonomy",
+				"taxonomyFile"
+			],
+			[
+				"reference",
+				"referenceFile"
+			],
+			[
+				"bc_",
+				"bc_check2s"
+			],
+			[
+				"_",
+				"_1"
+			],
+			[
+				"R1_fwd",
+				"R1_fwd_prim_checks"
+			],
+			[
+				"R2_fw",
+				"R2_fwd_prim_check"
+			],
+			[
+				"R2_fwd",
+				"R2_fwd_prim_checks"
+			],
+			[
+				"R1",
+				"R1_rev_prim_check"
+			],
+			[
+				"Rw",
+				"R2_fwd_prim_check"
+			],
+			[
+				"menu_co",
+				"menu_choices"
+			],
+			[
+				"menu",
+				"menu_choices"
+			],
+			[
+				"chosen_",
+				"chosen_item_options"
+			],
+			[
+				"cater",
+				"caterer_data"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "git",
+		"selected_items":
+		[
+			[
+				"git",
+				"git: commit"
+			],
+			[
+				"list package",
+				"Package Control: List Packages"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			],
+			[
+				"slack",
+				"Slack: Send Selection"
+			],
+			[
+				"preferences",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"gitsavvy",
+				"GitSavvy: help"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S"
+	],
+	"file_history":
+	[
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/.git/COMMIT_EDITMSG",
+		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_factanal.R",
+		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_adonis.R",
+		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_anova.R",
+		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_aov.R",
+		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_lm.R",
+		"/Users/keaton/Google Drive/UO/TCE_16S/TCE_my_pipeline/Shuar_SOL-only/shuar_SOL-only_highImpact2.Rmd",
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/scripts/build_otu_table.pl",
+		"/Users/keaton/Google Drive/Code/Perl_scripts/build_otu_table.pl",
+		"/Users/keaton/Google Drive/UO/TCE_16S/TCE_my_pipeline/Shuar_SOL-only/Shuar_Microbiome_Database_033016.txt",
+		"/Users/keaton/Google Drive/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/Shuar_Microbiome_Database_033016.txt",
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/2_derep_cluster_ID_16S.job",
+		"/Users/keaton/Library/Application Support/Sublime Text 3/Packages/User/Slack.sublime-settings",
+		"/Users/keaton/Library/Application Support/Sublime Text 3/Packages/Slack/README.md",
+		"/Users/keaton/Library/Application Support/Sublime Text 3/Packages/Slack/Slack.sublime-settings",
+		"/Users/keaton/Google Drive/Code/R_scripts/phyloseq_to_lefse.R",
+		"/Users/keaton/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/keaton/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/regionUV_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/regionCC_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/shuar_adult_lefse_Region_HelmStat_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/shuar_adult_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/regionUV_HelmStat_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/regionCC_HelmStat_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/regionCC_logCRP_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_results_WeightedUnifrac/LefSe_files/regionUV_logCRP_lefse_data.txt",
+		"/Users/keaton/Desktop/Tenalquot Washington ambient efflux and temperature Jan2011-July2012.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_HelminthStatus_LogCRPLoHi_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Region_SolHouseLoHi_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Ascaris_Coinfection_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Trichuris_Coinfection_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Infection_Ascaris_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Infection_Trichuris_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_SolHouseLoHi_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_LogCRPLoHi_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Coinfection_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Trichuris_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Ascaris_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Infection_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_HelminthStatus_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Sex_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_focused/LefSe_files/shuar_adult_lefse_Region_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_infection_present_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_infection_absent_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_infection_f_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_SexInfection_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_SolMarketLoHi_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_SolHouseLoHi_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_LogIgELoHi_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_LogCRPLoHi_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_LogIL6LoHi_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_BinnedAge_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_Infection_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_Sex_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_Region_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_SolTraditionalLoHi_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_SolMarketLoHi_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_SolHouseLoHi_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_LogIgELoHi_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_LogCRPLoHi_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_LogIL6LoHi_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_BinnedAge_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_Infection_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_Sex_lefse_data.xml",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_correct_data/LefSe_files/shuar_adult_Region_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_overview.Rmd",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/Non-R_plots/shuar_adult_binnedAge_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/Supplemental_code/README.txt",
+		"/Volumes/Git 2.6.4 Mavericks Intel Universal/README.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_solTraditionalHiLo_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_solMarketHiLo_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_solHouseHiLo_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_IgEhiLo_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_CRPhiLo_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/shuar_adult_il6HiLo_lefse_data.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/Non-R_plots/shuar_adult_infection_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/Non-R_plots/shuar_adult_infection_in_CC_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/Non-R_plots/shuar_adult_infection_in_UV_lefse_clad.svg",
+		"/Users/keaton/Documents/UO/TCE_16S/TCE_my_pipeline/Shuar_overview/Non-R_plots/shuar_adult_region_lefse_clad.svg",
+		"/Users/keaton/Desktop/keaton_rag1_neutral_model_code/Source_code/generate_label_df_errorbars.R",
+		"/Users/keaton/Desktop/keaton_rag1_neutral_model_code/Source_code/factorially_paste_rows.R",
+		"/Users/keaton/Desktop/keaton_rag1_neutral_model_code/Source_code/factorially_paste_lists.R",
+		"/Users/keaton/Code/Perl_scripts/cfb_poll_results.pl",
+		"/Users/keaton/Code/Perl_scripts/cfb_scoring_data.pl",
+		"/Users/keaton/Code/Perl_scripts/cfb_poll_results_old.pl",
+		"/Users/keaton/Code/Perl_scripts/rdp_tax2phyloseq_tax_nosupp.pl",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/Final_manuscript_outline_tax/NonR_figures/gut_d75_iso_lefse_cladogram_unmodded.svg",
+		"/Users/keaton/Desktop/all_smpls.taxa_tbl.rdp.txt",
+		"/Users/keaton/Documents/UO/TCE_16S/modified_meta_data_20160104.txt",
+		"/Users/keaton/Desktop/Amplification_data/innate_markers_linregOutput_target_genes.txt",
+		"/Users/keaton/Code/PBS_jobs/Process_16S/1_assemble_filter_cat_16S.job",
+		"/Users/keaton/Code/PBS_jobs/Process_16S/2_derep_cluster_ID_16S.job",
+		"/Users/keaton/Downloads/UO 2015 Season Team Stats - Sheet1.tsv",
+		"/Users/keaton/Code/Perl_scripts/uniq_16S.pl",
+		"/Users/keaton/Code/PBS_jobs/process_16S_uniqAll_usearch.job",
+		"/Users/keaton/Code/PBS_jobs/Process_16S/assemble_filter_cat_16S.job",
+		"/Users/keaton/Code/PBS_jobs/Process_16S/derep_cluster_ID_16S.job",
+		"/Users/keaton/Documents/Paradox Interactive/Crusader Kings II/save games/Lombardy905_08_22.ck2",
+		"/Users/keaton/Code/PBS_jobs/process_16S_uniqAll_uclust_chooseSort_preTrim.sh",
+		"/Users/keaton/Code/Perl_scripts/usearch7_relabel_otus.pl",
+		"/Users/keaton/Code/Perl_scripts/add_uniqIDs2fasta.pl",
+		"/Users/keaton/Code/Perl_scripts/build_otu_table.pl",
+		"/Users/keaton/Code/PBS_jobs/process_16S_uniqAll_uclust_chooseSort.job",
+		"/Users/keaton/Desktop/remove_these.txt",
+		"/Users/keaton/Library/Application Support/Karabiner/private.xml",
+		"/Users/keaton/Code/PBS_jobs/process_16S_uniqAll_uclust_chooseSort_singleLines.sh",
+		"/Users/keaton/Code/Perl_scripts/grab_matched_library_seqs.pl",
+		"/Users/keaton/Code/Perl_scripts/extract_aligned_region.pl",
+		"/Users/keaton/Code/Perl_scripts/seq_stats.pl",
+		"/Users/keaton/Code/Perl_libraries/Good_library.pm",
+		"/Users/keaton/Code/Perl_scripts/compare_unmatched_bcs.pl",
+		"/Users/keaton/Code/Perl_scripts/remove_primers.pl",
+		"/Users/keaton/Code/Perl_scripts/terminal.glue",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/08Oct2015_uniqAll(abundSort)uclust_otus/rag1_2014_manuscript_outline_uniqAll_abundSort.Rmd",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/08Oct2015_uniqAll(abundSort)usearch_otus_noHalo/rag1_2014_manuscript_outline_uniqAll_abundSort_usearchOTUs_noHalo.Rmd",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/08Oct2015_uniqAll(abundSort)usearch_otus/rag1_2014_manuscript_outline_uniqAll_abundSort_usearchOTUs.Rmd",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/08Oct2015_uniqAll(abundSort)uclust_otus_noHalo/rag1_2014_manuscript_outline_uniqAll_abundSort_noHalo.Rmd",
+		"/Users/keaton/Documents/UO/Rag1_2014/Current_output_My_pipeline/13Oct2015(abundSort)_usearch_noUNQ0/rag1_2014_manuscript_outline_uniqAll_abundSort_usearchOTUs_noUNQ0.Rmd",
+		"/Users/keaton/Downloads/META-16S-pipeline-release-public/scripts/classify.py",
+		"/Users/keaton/Code/PBS_jobs/process_16S_uniqAll.job",
+		"/Users/keaton/Desktop/all_smpls.joined.filt.uniq.gt2.noHost.clustered.up",
+		"/Users/keaton/Downloads/META-16S-pipeline-release-public/scripts/form_otus.py",
+		"/Users/keaton/Dropbox/Mendeley Papers/Zughaier et al/2005/Infection and immunity/2005_Zughaier et al._Differential Induction of the Toll-Like Receptor 4–MyD88-Dependent and -Independent Signaling Pathways by Endotox.txt",
+		"/Users/keaton/Code/Perl_scripts/build_otu_table_OLD.pl",
+		"/Users/keaton/Code/PBS_jobs/process_16S_chooseSort.job"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"smplAbund",
+			"\\+",
+			"\\s",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"fill:",
+			" ",
+			"\\+",
+			"\\s",
+			"\\+",
+			" ",
+			"\\+ ",
+			"+ ",
+			"#008000",
+			"#ff0000",
+			"\" style=\"fill:#",
+			"style=\"fill:#",
+			"fill:#",
+			"fill:",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"#ff0000",
+			"#008000",
+			"fill",
+			"#ff0000",
+			"fill:",
+			"#ffffff",
+			"([\\w\\)])\\+([A-Z])",
+			"\\n",
+			" ",
+			" +",
+			"([\\w\\)])\\+([A-Z])",
+			"\\n",
+			" ",
+			"([\\w\\)])\\+([A-Z])",
+			"([\\w\\)])\\+[A-Z]",
+			"\\n",
+			" ",
+			" \\+ (\\S)",
+			" \\+ ",
+			" + ",
+			"([\\w\\)])\\+([A-Z])",
+			"[\\w\\)]\\+[A-Z]",
+			"[\\w\\)]\\+\\w",
+			"[\\w\\)]+\\w",
+			" ",
+			"\\n",
+			" + 1",
+			"ff0000",
+			"008000",
+			"00800",
+			"00800ff",
+			"FF0000FF",
+			"\\d\\t([\\w\\ ]+)\\tdomain",
+			"tr/",
+			"TENN",
+			"Oklahoma",
+			"score",
+			"win",
+			"class\\=\\\"time\\-stamp\\\">(.+?)<",
+			"400603868",
+			"class\\=\\\"time\\-stamp\\\">(.+?)<",
+			"0:40",
+			"time-stamp",
+			"fourth",
+			"first quarter",
+			"open OUT, $",
+			"class=\"away-score\">\\d+?<",
+			">TD<",
+			"fourth Quarter.+<\\/p>",
+			"fourth Quarter.+\\</p\\>",
+			"fourth Quarter.+\\<\\/p\\>",
+			"fourth Quarter",
+			"first quarter.+second quarter",
+			"class\\=\\\"scoring-summary\\\".+article\\>",
+			"class\\=\\\"scoring-summary\\\".+scale",
+			"class\\=\\\"scoring-summary\\\"",
+			"class\\=\\\"scoring-summary\\\".+\\<\\/div\\>\\<\\/article\\>",
+			"class\\=\\\"scoring-summary\\\"(.+)\\<\\/div\\>\\<\\/article\\>",
+			"first Quarter.+second Quarter",
+			"headline",
+			"KJ Maye 22 yd",
+			"KJ Maye 22yd",
+			"Josh Doctson 11 Yd pass from Trevone Boykin \\(Jaden Oberkrom Kick\\)",
+			"Jaden Oberkrom 53 Yd Field Goal",
+			"aden Oberkrom 53 Yd Field Goal",
+			"Scoring Plays",
+			"KJ Maye",
+			"scoring plays.+Elliott",
+			"scoring plays",
+			"scoring plays.+May",
+			"scoring plays.+?1\\:32",
+			"scoring plays.+?1:32",
+			"scoring plays",
+			"rawDir",
+			"\"yes\"",
+			"\\\\\\n\\t",
+			"Oberto",
+			"522721=",
+			"=522721",
+			"thecharactersid=",
+			"thecharactersid",
+			"522721",
+			"qual_percent",
+			"usearch7",
+			"uniq_16S",
+			"uniq",
+			"add_uniq",
+			"simple",
+			"batch",
+			"\\$uclust_outDir",
+			"usearch_outDir",
+			"usearch_library",
+			"singles_id",
+			"usearch_dist",
+			"Collapse"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			" + \\n",
+			"",
+			"#66C2A5",
+			"#FC8D62",
+			"#66C2A5",
+			"#33A02C",
+			"#FB9A99",
+			"#1F78B4",
+			"#E31A1C",
+			"#1F78B4",
+			"#E31A1C",
+			"#1F78B4",
+			"#E31A1C",
+			"#E41A1C",
+			"#FB9A99",
+			"#33A02C",
+			"#66C2A5",
+			"#FC8D62",
+			"#FDB462",
+			"#6A3D9A",
+			"_",
+			" + \\n",
+			"",
+			" + \\n",
+			"",
+			"+ \\n",
+			"#377EB8",
+			"#4DAF4A",
+			"#FC8D62",
+			"#66C2A5",
+			"#33A02C",
+			"#FB9A99",
+			"#33A02C",
+			"#FB9A99",
+			"#FDB462",
+			"#6A3D9A",
+			"\\1 + \\n\\2",
+			"",
+			"\\t",
+			"\\1 + \\n\\2",
+			"",
+			"\\1 + \\n\\2",
+			"",
+			" + \\n\\1",
+			"\\1 + \\2",
+			"",
+			"+1",
+			"e41a1c",
+			"1f78b4",
+			"'yes'",
+			"",
+			"qual_pct",
+			"\\$cluster_outDir",
+			"cluster_outDir",
+			"ref_library",
+			"pct_id",
+			"cluster_dist",
+			"Dereplicate",
+			"comboName",
+			"uparse",
+			"\\$format",
+			"GTM",
+			"GTK",
+			"\\$gtkFile",
+			"\\$gtkMap",
+			"$gtkMap",
+			"$gtkFile",
+			"",
+			"usearch",
+			"$uniqID",
+			"abundsBySmpl",
+			"",
+			"noHost",
+			"#E41A1C",
+			"#E41A1c",
+			"#1F78B4",
+			"Cohoused",
+			"Isolated",
+			"runName",
+			"$rawDir/$jobName.log",
+			".",
+			"$fastaFile",
+			"",
+			"\\1|",
+			"|",
+			"|\\1",
+			"|",
+			"IN2",
+			"IN1",
+			"\\t",
+			"",
+			"\\t",
+			"",
+			"$compared_subseq",
+			"Vote_url",
+			"Vote_urls",
+			"Poll_names",
+			"\\t",
+			"<",
+			">",
+			"@perm_bestComparisons",
+			"\\%perm_diffs",
+			"\\$perm_diffs",
+			"$perm_diffs",
+			"\\1\\n\\2",
+			"comparison",
+			"$seq",
+			"$m",
+			"\\1\\2",
+			"\"",
+			"smpl_grp",
+			"smpl_grps",
+			"paired",
+			"BLAST",
+			"smpl_otu",
+			"OUT",
+			"SBS",
+			"CL",
+			"clust_file",
+			"tempfile",
+			"seq",
+			"",
+			"$c_file",
+			"$j_file",
+			"$v_file",
+			"seg_assigns",
+			"R2I",
+			"R1I"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.GitSavvy":
+	{
+		"height": 94.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "Process_16S.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"PBS_jobs/bowtie2_output.batch.job"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 207.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
