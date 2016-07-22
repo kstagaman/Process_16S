@@ -523,10 +523,30 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "git",
+		"height": 47.0,
+		"last_filter": "git commit all",
 		"selected_items":
 		[
+			[
+				"git commit all",
+				"git: commit including unstaged files"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"git push",
+				"git: push"
+			],
+			[
+				"git comm",
+				"git: commit"
+			],
+			[
+				"git add",
+				"Git: Add Current File"
+			],
 			[
 				"git",
 				"git: commit"
@@ -552,10 +572,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"mark",
-				"Markdown Preview: Preview in Browser"
-			],
-			[
 				"gitsavvy",
 				"GitSavvy: help"
 			],
@@ -564,7 +580,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 449.0
+		"width": 402.0
 	},
 	"console":
 	{
@@ -588,6 +604,9 @@
 	],
 	"file_history":
 	[
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/1_Sequence_processing_and_OTU_picking/2_derep_cluster_ID_16S.job",
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/1_Sequence_processing_and_OTU_picking/1_assemble_filter_cat_16S.job",
+		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/README.md",
 		"/Users/keaton/Google Drive/Code/PBS_jobs/Process_16S/.git/COMMIT_EDITMSG",
 		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_factanal.R",
 		"/Users/keaton/Google Drive/Code/R_scripts/xtable_summary_adonis.R",
@@ -712,10 +731,7 @@
 		"/Users/keaton/Downloads/META-16S-pipeline-release-public/scripts/classify.py",
 		"/Users/keaton/Code/PBS_jobs/process_16S_uniqAll.job",
 		"/Users/keaton/Desktop/all_smpls.joined.filt.uniq.gt2.noHost.clustered.up",
-		"/Users/keaton/Downloads/META-16S-pipeline-release-public/scripts/form_otus.py",
-		"/Users/keaton/Dropbox/Mendeley Papers/Zughaier et al/2005/Infection and immunity/2005_Zughaier et al._Differential Induction of the Toll-Like Receptor 4–MyD88-Dependent and -Independent Signaling Pathways by Endotox.txt",
-		"/Users/keaton/Code/Perl_scripts/build_otu_table_OLD.pl",
-		"/Users/keaton/Code/PBS_jobs/process_16S_chooseSort.job"
+		"/Users/keaton/Downloads/META-16S-pipeline-release-public/scripts/form_otus.py"
 	],
 	"find":
 	{
@@ -734,6 +750,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"*",
+			"_",
 			"smplAbund",
 			"\\+",
 			"\\s",
@@ -859,16 +877,16 @@
 			"\\$uclust_outDir",
 			"usearch_outDir",
 			"usearch_library",
-			"singles_id",
-			"usearch_dist",
-			"Collapse"
+			"singles_id"
 		],
 		"highlight": false,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"-",
+			"\\_",
 			" + \\n",
 			"",
 			"#66C2A5",
@@ -994,9 +1012,7 @@
 			"$c_file",
 			"$j_file",
 			"$v_file",
-			"seg_assigns",
-			"R2I",
-			"R1I"
+			"seg_assigns"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1051,6 +1067,10 @@
 	{
 		"height": 0.0
 	},
+	"output.git":
+	{
+		"height": 94.0
+	},
 	"output.unsaved_changes":
 	{
 		"height": 100.0
@@ -1059,7 +1079,7 @@
 	"project": "Process_16S.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
