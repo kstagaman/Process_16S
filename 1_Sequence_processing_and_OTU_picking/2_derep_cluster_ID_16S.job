@@ -11,7 +11,7 @@
 #PBS -M 
 
 ### Use the script to dereplicated, cluster OTUs, and identitfy from 16S sequences.
-### This script requires you to have run assemble_filter_cat_16S.job on this same data
+### This script requires you to have run 1_assemble_filter_cat_16S.job on this same data
 
 ### Auxillary scripts and programs
 # bowtie/2.2.1

@@ -13,7 +13,8 @@
 ### Use the script to assemble, quality filter, and concatenate paired-end illumina 16S sequences. 
 # This script requires that the sequences have been demultiplexed and 
 # each sample file pair has the following format: 
-#     sample_name-R1.fastq sample_name-R2.fastq 
+#     sample_name-R1.fastq
+#     sample_name-R2.fastq 
 #     (where sample_name is the sample ID not containing any -'s or .'s)
 
 ### Auxillary scripts and programs
