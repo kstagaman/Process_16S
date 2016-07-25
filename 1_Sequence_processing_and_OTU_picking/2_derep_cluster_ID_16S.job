@@ -35,7 +35,7 @@ inclSngls=no
 runBowtie=no
 
 rawDir=`pwd`
-scriptsDir=`find $HOME -path "*/Process_16S/scripts"`
+scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
 today=(`date`)
 runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
 echo "clusterTool=$clusterTool" >> $rawDir/$runName.log
