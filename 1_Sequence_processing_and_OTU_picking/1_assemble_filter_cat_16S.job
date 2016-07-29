@@ -1,5 +1,5 @@
 #!/bin/bash -l
-# assemble_filter_cat_16.job
+# 1_assemble_filter_cat_16.job
 
 ### Queuing variables
 #PBS -N 
@@ -16,6 +16,9 @@
 #     sample_name-R1.fastq
 #     sample_name-R2.fastq 
 #     (where sample_name is the sample ID not containing any -'s or .'s)
+
+### To run job enter:
+# qsub 1_assemble_filter_cat_16.job
 
 ### Auxillary scripts and programs
 # flash/1.2.7

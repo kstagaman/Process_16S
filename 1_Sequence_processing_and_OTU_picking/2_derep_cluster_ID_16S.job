@@ -1,5 +1,5 @@
 #!/bin/bash -l
-# derep_cluster_ID_16S.job
+# 2_derep_cluster_ID_16S.job
 
 ### Queuing variables
 #PBS -N 
@@ -12,6 +12,9 @@
 
 ### Use the script to dereplicated, cluster OTUs, and identitfy from 16S sequences.
 ### This script requires you to have run 1_assemble_filter_cat_16S.job on this same data
+
+### To run job enter:
+# qsub 2_derep_cluster_ID_16S.job
 
 ### Auxillary scripts and programs
 # bowtie/2.2.1
