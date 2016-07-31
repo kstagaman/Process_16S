@@ -2,6 +2,7 @@
 # 2_derep_cluster_ID_16S.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes

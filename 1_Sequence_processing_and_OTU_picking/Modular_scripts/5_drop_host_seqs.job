@@ -2,6 +2,7 @@
 # 5_drop_host_seqs.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -10,10 +11,15 @@
 #PBS -m ae
 #PBS -M 
 
-### Use the script to remove host-matching 16S sequences.
+### Use the script to remove host-matching 16S sequences 
+### This script is optional within the pipeline, 
+### but make sure to set `runBowtie=no` in next script if 
+### you skip this one
 
 ### To run job enter:
-# qsub 5_drop_host_seqs.job
+# qsub 5_drop_host_seqs.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/5_drop_host_seqs.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # bowtie/2.2.1

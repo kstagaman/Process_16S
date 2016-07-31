@@ -2,6 +2,7 @@
 # 8_align_seed_seqs.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -13,11 +14,19 @@
 ### Use the script to align seed sequences for clustered OTUs.
 
 ### To run job enter:
-# qsub 8_align_seed_seqs.job
+# qsub 8_align_seed_seqs.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/8_align_seed_seqs.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # mafft (v7.029b)
 # join_multi-lined_fasta.pl
+
+### Environment variables ###
+rawDir=`pwd`
+scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
+today=(`date`)
+runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
 
 # Directories
 cluster_outDir=`echo 04_*`

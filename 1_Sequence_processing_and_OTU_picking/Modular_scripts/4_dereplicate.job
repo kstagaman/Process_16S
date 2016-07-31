@@ -2,6 +2,7 @@
 # 4_dereplicate.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -13,7 +14,9 @@
 ### Use the script to dereplicate 16S sequences contained in a single file.
 
 ### To run job enter:
-# qsub 4_dereplicate.job
+# qsub 4_dereplicate.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/4_dereplicate.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # uniq_16S.pl
@@ -25,7 +28,7 @@ clusterTool=usearch # this option is more for the clustering script, but is requ
 inclSngls=no # this option is more for the clustering script, but is required here for proper data handling
 
 rawDir=`pwd`
-# scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
+scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
 today=(`date`)
 runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
 echo "clusterTool=$clusterTool" >> $rawDir/$runName.log

@@ -2,6 +2,7 @@
 # 1_read_assembly.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -18,7 +19,9 @@
 #     (where sample_name is the sample ID not containing any -'s or .'s)
 
 ### To run job enter:
-# qsub 1_read_assembly.job
+# qsub 1_read_assembly.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/1_read_assembly.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # flash/1.2.7

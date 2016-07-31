@@ -2,6 +2,7 @@
 # 3_convert_and_concatenate.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -13,7 +14,9 @@
 ### Use the script to converted assembled, quality-filtered paired-end illumina 16S sequences to FastA format and concatenate into one file. 
 
 ### To run job enter:
-# qsub 3_convert_and_concatenate.job
+# qsub 3_convert_and_concatenate.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/3_convert_and_concatenate.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # batch_rename.sh

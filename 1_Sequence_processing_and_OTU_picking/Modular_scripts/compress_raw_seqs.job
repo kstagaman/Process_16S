@@ -2,6 +2,7 @@
 # compress_raw_seqs.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -14,7 +15,9 @@
 ### Keep in mind, doing so means you can no longer run Process_16S on the sequences without first uncompressing them.
 
 ### To run job enter:
-# qsub compress_raw_seqs.job
+# qsub compress_raw_seqs.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/compress_raw_seqs.job (Run within raw reads directory)
 
 ##################################################################################
 

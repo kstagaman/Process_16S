@@ -2,6 +2,7 @@
 # 7_build_otu_table.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -14,7 +15,9 @@
 ### This script requires you to have run 1_assemble_filter_cat_16S.job on this same data
 
 ### To run job enter:
-# qsub 7_build_otu_table.job
+# qsub 7_build_otu_table.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/7_build_otu_table.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # build_otu_table.pl

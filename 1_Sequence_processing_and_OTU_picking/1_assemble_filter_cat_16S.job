@@ -2,6 +2,7 @@
 # 1_assemble_filter_cat_16.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes

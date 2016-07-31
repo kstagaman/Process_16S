@@ -26,3 +26,8 @@ Programs called by the scripts in 1\_Sequence\_processing\_and\_OTU\_picking/
 - mafft (v7.029b)
 - fasttree/2.1.4
 - RDPTools/140616
+
+## Modular scripts
+Some users voiced an interest in being able to run each step of the pipeline individually to see the output. The Modular\_scripts directory contains the exact same pipeline as Sequence\_processing\_and\_OTU\_picking/, but broken up in just such a fashion.
+
+Because many of the steps after the first few scripts take very little time to run, it may not be necessary or even expedient to submit them as jobs. Therefore, all of these scripts can also be run as shell scripts within the raw reads directory (the same directory supplied to the `-d` PBS flag.

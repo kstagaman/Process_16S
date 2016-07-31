@@ -2,6 +2,7 @@
 # 6_cluster_otus.job
 
 ### Queuing variables
+# (The d flag is always the raw reads directory)
 #PBS -N 
 #PBS -d 
 #PBS -q fatnodes
@@ -13,7 +14,9 @@
 ### Use the script to cluster OTUs from 16S sequences.
 
 ### To run job enter:
-# qsub 6_cluster_otus.job
+# qsub 6_cluster_otus.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/6_cluster_otus.job (Run within raw reads directory)
 
 ### Auxillary scripts and programs
 # usearch/7.0.1090 -OR- uclust/1.2.22
@@ -26,7 +29,7 @@ clusterTool=usearch
 ###### Include singletons by matching them back to clusters formed without them ("yes" or "no")? ######
 inclSngls=no
 
-###### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")? ######
+###### Did you run 5_drop_host_seqs.job ("yes" or "no")? ######
 runBowtie=yes
 
 rawDir=`pwd`
