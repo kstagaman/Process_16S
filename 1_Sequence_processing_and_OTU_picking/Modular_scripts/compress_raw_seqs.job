@@ -1,0 +1,26 @@
+#!/bin/bash -l
+# compress_raw_seqs.job
+
+### Queuing variables
+#PBS -N 
+#PBS -d 
+#PBS -q fatnodes
+
+#PBS -k oe
+#PBS -m ae
+#PBS -M 
+
+### Use the script to move the raw sequence reads into their own folder and compress them.
+### Keep in mind, doing so means you can no longer run Process_16S on the sequences without first uncompressing them.
+
+### To run job enter:
+# qsub compress_raw_seqs.job
+
+##################################################################################
+
+mkdir Raw_seqs
+mv *fastq Raw_seqs
+tar -zvcf Raw_seqs.tgz Raw_seqs
+if [ $? == 0 ]; then
+	rm -r Raw_seqs
+fi

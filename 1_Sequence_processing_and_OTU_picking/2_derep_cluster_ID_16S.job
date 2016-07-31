@@ -10,7 +10,7 @@
 #PBS -m ae
 #PBS -M 
 
-### Use the script to dereplicated, cluster OTUs, and identitfy from 16S sequences.
+### Use the script to dereplicate, cluster OTUs, and identitfy from 16S sequences.
 ### This script requires you to have run 1_assemble_filter_cat_16S.job on this same data
 
 ### To run job enter:
@@ -91,6 +91,7 @@ fi
 final_outDir=00_Final_output
 
 ### Mafft variables
+mafftDir=$scriptsDir/kstagaman_bin # if mafft is not being run on ACISS, this needs to point to the correct directory containing mafft
 mafft_threads=`grep -c "^processor" /proc/cpuinfo`
 mafft_open=10  # these open and extend penalties are much higher than the default. I chose them because I've found that 
 mafft_extend=5 # if the resulting alignments are highly gapped, I probably did something wrong upstream, or the data is really bad.
@@ -214,7 +215,7 @@ mv $final_outDir/$comboName.clustered.otu_tbl.txt $final_outDir/all_smpls.otu_tb
 
 ### Alignment (mafft)
 cd $rawDir/$cluster_outDir
-$scriptsDir/kstagaman_bin/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta
+$mafftDir/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta
 echo -e "$scriptsDir/kstagaman_bin/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta\n" >> $rawDir/$runName.log
 
 ### Cleanup
@@ -227,7 +228,7 @@ FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs
 echo -e "FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs.aln.fasta > all_smpls.otus.tree\n" >> $rawDir/$runName.log
 
 ### Taxon assignment (RDP classifier)
-java -Xmx1g -jar /usr/local/packages/RDPTools/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp.txt
+java -Xmx1g -jar /usr/local/packages/RDPTools/140616/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp.txt
 echo -e "java -Xmx1g -jar /usr/local/packages/RDPTools/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp.txt\n" >> $rawDir/$runName.log
 
 $scriptsDir/rdp_tax2phyloseq_tax_nosupp.pl -i all_smpls.taxa_tbl.rdp.txt
