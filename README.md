@@ -4,10 +4,10 @@ The directories in this repository contain a pipeline to process and analyze the
 
 ## Directories and scripts
 
-The scripts should be run in the following order. The input for these scripts is raw, demultiplexed 16S amplicon Illumina sequencing data in FastQ format. Auxilliary scripts called within the main scripts can be found in a "Support\_scripts" directory in each main directory below.
+The scripts should be run in the following order. The input for these scripts is raw, demultiplexed 16S amplicon Illumina sequencing data in FastQ format. Auxilliary scripts called within the main scripts can be found in "Support\_scripts"
 
-1. assemble\_filter\_cat\_16S.job
-2. derep\_cluster\_ID\_16S.job
+- 1\_assemble\_filter\_cat\_16S.job
+- 2\_derep\_cluster\_ID\_16S.job
 
 ## Other required programs
 
