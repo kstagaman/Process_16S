@@ -37,7 +37,7 @@ module load fastx_toolkit/0.0.13
 
 ### Environment variables ###
 rawDir=`pwd`
-scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
+scriptsDir=`find $HOME -path "*/Process_16S/1_Sequence_processing_and_OTU_picking/Support_scripts"`
 today=(`date`)
 runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
 read1s=(`ls *-R1.fastq`) # this makes a list of the appropriate read1 files
