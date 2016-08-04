@@ -1,0 +1,45 @@
+#!/bin/bash -l
+# 7_build_otu_table.job
+
+### Queuing variables
+# (The d flag is always the raw reads directory)
+#PBS -N 
+#PBS -d 
+#PBS -q fatnodes
+
+#PBS -k oe
+#PBS -m ae
+#PBS -M 
+
+### Use the script to dereplicate, cluster OTUs, and identitfy from 16S sequences.
+### This script requires you to have run 1_assemble_filter_cat_16S.job on this same data
+
+### To run job enter:
+# qsub 7_build_otu_table.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/7_build_otu_table.job (Run within raw reads directory)
+
+### Auxillary scripts and programs
+# build_otu_table.pl
+
+rawDir=`pwd`
+scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
+today=(`date`)
+runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
+
+### Directories and names
+uniq_outDir=03_UniqSeq_files
+cluster_outDir=`echo 04_*`
+final_outDir=00_Final_output
+concatName=all_smpls.joined.filt
+comboName=$concatName.uniq.allSize.noHost
+
+##################################################################################
+
+### Build OTU table
+mkdir $rawDir/$final_outDir
+$scriptsDir/build_otu_table.pl -f uclust -o $final_outDir -i $cluster_outDir/$comboName.clustered.uc -m $uniq_outDir/$concatName.uniq_allSize_map.txt
+echo -e "$scriptsDir/build_otu_table.pl -f uclust -o $final_outDir -i $cluster_outDir/$comboName.clustered.uc -m $uniq_outDir/$concatName.uniq_allSize_map.txt\n" >> $rawDir/$runName.log
+mv $final_outDir/$comboName.clustered.otu_tbl.txt $final_outDir/all_smpls.otu_tbl.txt
+
+cd $rawDir

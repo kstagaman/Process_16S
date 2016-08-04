@@ -1,0 +1,59 @@
+#!/bin/bash -l
+# 3_convert_and_concatenate.job
+
+### Queuing variables
+# (The d flag is always the raw reads directory)
+#PBS -N 
+#PBS -d 
+#PBS -q fatnodes
+
+#PBS -k oe
+#PBS -m ae
+#PBS -M 
+
+### Use the script to converted assembled, quality-filtered paired-end illumina 16S sequences to FastA format and concatenate into one file. 
+
+### To run job enter:
+# qsub 3_convert_and_concatenate.job (Run anywhere)
+#		-OR-
+# PATH/TO/Process_16S/Modular_scripts/3_convert_and_concatenate.job (Run within raw reads directory)
+
+### Auxillary scripts and programs
+# batch_rename.sh
+# simple_fq2fa.pl
+
+### Environment variables ###
+rawDir=`pwd`
+scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
+today=(`date`)
+runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
+qual_outDir=`echo 02_Filtered_q*`
+
+### Concatenating variables (cat)
+concatName=all_smpls.joined.filt
+uniq_outDir=03_UniqSeq_files
+
+##################################################################################
+
+### Convert fastQs to fastAs (simple_fq2fa.pl)
+cd $rawDir/$qual_outDir
+for fq in *fastq; do 
+	$scriptsDir/simple_fq2fa.pl -i $fq
+done
+echo "$scriptsDir/simple_fq2fa.pl -i {fq}" >> $rawDir/$runName.log
+$scriptsDir/batch_rename.sh "*fastq.fa" fastq.fa fasta
+
+### Add sample names to fasta headers
+for fa in *fasta; do 
+	smpl=`echo $fa | cut -d '.' -f 1`
+	sed "s/^>..*/>$smpl/g" $fa > $fa.edited
+done
+echo 'sed "s/^>..*/>{smpl}/g" {fa} > {fa}.edited' >> $rawDir/$runName.log
+$scriptsDir/batch_rename.sh "*edited" fasta.edited fasta
+
+### Concatenate files
+mkdir $rawDir/$uniq_outDir
+cat *fasta > $rawDir/$uniq_outDir/$concatName.fasta
+echo "cat *fasta > $rawDir/$uniq_outDir/$concatName.fasta" >> $rawDir/$runName.log
+
+cd $rawDir
