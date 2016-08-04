@@ -1,0 +1,147 @@
+#!/bin/bash -l
+# 1_assemble_filter_cat_16.job
+
+### Queuing variables
+# (The d flag is always the raw reads directory)
+#PBS -N 
+#PBS -d 
+#PBS -q fatnodes
+
+#PBS -k oe
+#PBS -m ae
+#PBS -M 
+
+### Use the script to assemble, quality filter, and concatenate paired-end illumina 16S sequences. 
+# This script requires that the sequences have been demultiplexed and 
+# each sample file pair has the following format: 
+#     sample_name-R1.fastq
+#     sample_name-R2.fastq 
+#     (where sample_name is the sample ID not containing any -'s or .'s)
+
+### To run job enter:
+# qsub 1_assemble_filter_cat_16.job
+
+### Auxillary scripts and programs
+# flash/1.2.7
+# fastx_toolkit/0.0.13
+# batch_rename.sh
+# simple_fq2fa.pl
+
+
+###### Compress raw sequence files at the end ("yes" or "no")? ######
+compress_raw=no
+
+### Load Modules
+module load flash/1.2.7
+module load fastx_toolkit/0.0.13
+
+### Environment variables ###
+rawDir=`pwd`
+scriptsDir=`find $HOME -path "*/Process_16S/1_Sequence_processing_and_OTU_picking/Support_scripts"`
+today=(`date`)
+runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
+read1s=(`ls *-R1.fastq`) # this makes a list of the appropriate read1 files
+read2s=(`ls *-R2.fastq`) # this does the same for read2s and they should match in order
+if [[ ${#read1s[@]} -eq 0 ]]; then 
+	if [[ ${#read2s[@]} -eq 0 ]]; then
+		echo -e "\tThere are no read files present in the directory using the proper naming convention" && \
+		echo -e "\t(sample_name-R1.fastq, sample_name-R2.fastq)\n"
+		# exit
+	else
+		echo -e "\tThere are no read 1 files present in the directory using the proper naming convention" && \
+		echo -e "\t(sample_name-R1.fastq)\n"
+		# exit
+	fi
+else
+	if [[ ${#read2s[@]} -eq 0 ]]; then
+	echo -e "\tThere are no read 2 files present in the directory using the proper naming convention" && \
+	echo -e "\t(sample_name-R2.fastq)\n"
+	# exit
+	fi
+fi
+
+
+### Flash variables
+flash_minOverlap=20 
+flash_maxOverlap=150 # 247 min and max are what I used for PE250 reads of the V4 region, 20min, 150max for PE150 reads
+flash_mismatch=0.25 # increasing this leads to more assemblies made, but increases error rate
+flash_end=`expr ${#read1s[@]} - 1`
+flash_outDir=01_Flash_m${flash_minOverlap}M${flash_maxOverlap}
+
+### Quality filtering variables (fastq_quality_filter)
+qual_min=20
+qual_pct=95
+qual_outDir=02_Filtered_q${qual_min}p${qual_pct}
+
+### Concatenating variables (cat)
+concatName=all_smpls.joined.filt
+uniq_outDir=03_UniqSeq_files
+
+##################################################################################
+
+### Read assembly (flash)
+mkdir $flash_outDir
+for i in `seq 0 $flash_end`; do 
+	name=`echo ${read1s[$i]} | cut -d '-' -f 1`
+	flash -m $flash_minOverlap -M $flash_maxOverlap -x $flash_mismatch -o $flash_outDir/$name ${read1s[$i]} ${read2s[$i]}
+done
+echo "flash -m $flash_minOverlap -M $flash_maxOverlap -x $flash_mismatch -o $flash_outDir/{name} {read1s[i]} {read2s[i]}" >> $rawDir/$runName.log
+
+cd $flash_outDir
+
+### Clean up 
+mkdir Flash_notCombined
+mkdir Flash_histograms
+mv *.notCombined*fastq Flash_notCombined
+echo "mv \*.notCombined\*fastq Flash_notCombined" >> $rawDir/$runName.log
+mv *.hist* Flash_histograms
+echo "mv \*.hist\* Flash_histograms" >> $rawDir/$runName.log
+
+$scriptsDir/batch_rename.sh "*extended*" extendedFrags joined
+echo "$scriptsDir/batch_rename.sh \"*extended*\" extendedFrags joined" >> $rawDir/$runName.log
+
+cd $rawDir
+
+### Quality filtering (fastq_quality_filter)
+mkdir $rawDir/$qual_outDir
+for fq in $flash_outDir/*fastq; do 
+	name=`echo $fq | cut -d '/' -f 2 | rev | cut -d '.' -f 2- | rev`
+	fastq_quality_filter -q $qual_min -p $qual_pct -i $fq -o $qual_outDir/$name.filt.fastq -Q 33
+done
+echo "fastq_quality_filter -q $qual_min -p $qual_pct -i {fq} -o $qual_outDir/{name}.filt.fastq -Q 33" >> $rawDir/$runName.log
+
+### Convert fastQs to fastAs (simple_fq2fa.pl)
+cd $rawDir/$qual_outDir
+for fq in *fastq; do 
+	$scriptsDir/simple_fq2fa.pl -i $fq
+done
+echo "$scriptsDir/simple_fq2fa.pl -i {fq}" >> $rawDir/$runName.log
+$scriptsDir/batch_rename.sh "*fastq.fa" fastq.fa fasta
+
+### Add sample names to fasta headers
+for fa in *fasta; do 
+	smpl=`echo $fa | cut -d '.' -f 1`
+	sed "s/^>..*/>$smpl/g" $fa > $fa.edited
+done
+echo 'sed "s/^>..*/>{smpl}/g" {fa} > {fa}.edited' >> $rawDir/$runName.log
+$scriptsDir/batch_rename.sh "*edited" fasta.edited fasta
+
+### Concatenate files
+mkdir $rawDir/$uniq_outDir
+cat *fasta > $rawDir/$uniq_outDir/$concatName.fasta
+echo "cat *fasta > $rawDir/$uniq_outDir/$concatName.fasta" >> $rawDir/$runName.log
+
+cd $rawDir
+
+### Compression
+if [ $compress_raw == "yes" ]; then
+	mkdir Raw_seqs
+	mv *fastq Raw_seqs
+	tar -zvcf Raw_seqs.tgz Raw_seqs
+	if [ $? == 0 ]; then
+		rm -r Raw_seqs
+	fi
+fi
+
+
+
