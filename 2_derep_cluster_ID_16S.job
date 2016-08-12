@@ -36,7 +36,7 @@ clusterTool=usearch
 inclSngls=no
 
 ###### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")? ######
-runBowtie=no
+runBowtie=yes
 
 rawDir=`pwd`
 scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
