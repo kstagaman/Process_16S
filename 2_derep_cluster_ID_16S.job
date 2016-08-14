@@ -39,14 +39,14 @@ inclSngls=no
 runBowtie=no
 
 rawDir=`pwd`
-echo "rawDir=$rawDir" >> $rawDir/$runName.log
 scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
 if [ ! -d kstagaman_bin ]; then 
 	ln -s /home2/stagaman/bin $scriptsDir/kstagaman_bin
 fi
-echo "scriptsDir=$scriptsDir" >> $rawDir/$runName.log
 today=(`date`)
 runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
+echo "rawDir=$rawDir" >> $rawDir/$runName.log
+echo "scriptsDir=$scriptsDir" >> $rawDir/$runName.log
 echo "clusterTool=$clusterTool" >> $rawDir/$runName.log
 echo "inclSngls=$inclSngls" >> $rawDir/$runName.log
 
