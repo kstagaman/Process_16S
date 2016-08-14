@@ -36,7 +36,7 @@ clusterTool=usearch
 inclSngls=no
 
 ###### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")? ######
-runBowtie=yes
+runBowtie=no
 
 rawDir=`pwd`
 echo "rawDir=$rawDir" >> $rawDir/$runName.log
@@ -67,7 +67,7 @@ concatName=all_smpls.joined.filt
 
 ### Dereplicate reads variables (uniq_16S.pl)
 uniq_outDir=03_UniqSeq_files
-uniq_keep=10 # mininum number of identical sequences to keep unique read
+uniq_keep=2 # mininum number of identical sequences to keep unique read
 echo "uniq_keep=$uniq_keep" >> $rawDir/$runName.log
 gt=`expr $uniq_keep - 1` # for file naming purposes
 
