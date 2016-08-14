@@ -40,7 +40,7 @@ runBowtie=no
 
 rawDir=`pwd`
 scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
-if [ ! -d kstagaman_bin ]; then 
+if [ ! kstagaman_bin ]; then 
 	ln -s /home2/stagaman/bin $scriptsDir/kstagaman_bin
 fi
 today=(`date`)
@@ -70,7 +70,7 @@ concatName=all_smpls.joined.filt
 
 ### Dereplicate reads variables (uniq_16S.pl)
 uniq_outDir=03_UniqSeq_files
-uniq_keep=2 # mininum number of identical sequences to keep unique read
+uniq_keep=10 # mininum number of identical sequences to keep unique read
 echo "uniq_keep=$uniq_keep" >> $rawDir/$runName.log
 gt=`expr $uniq_keep - 1` # for file naming purposes
 
@@ -128,9 +128,9 @@ else
 		echo -e "$scriptsDir/uniq_16S.pl -i $concatName.fasta -k $uniq_keep\n" >> $rawDir/$runName.log
 	fi
 fi
-overThreshName=`echo *gt*.fasta | rev | cut -d '.' -f 2- | rev`
+overThreshName=`echo *gt${gt}*.fasta | rev | cut -d '.' -f 2- | rev`
 if [ $inclSngls == 'yes' ]; then 
-	underThreshName=`echo *lte*.fasta | rev | cut -d '.' -f 2- | rev`
+	underThreshName=`echo *lte${gt}*.fasta | rev | cut -d '.' -f 2- | rev`
 fi
 
 ### Drop seqs that align to host genome
