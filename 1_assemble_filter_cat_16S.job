@@ -36,7 +36,7 @@ module load fastx_toolkit/0.0.13
 
 ### Environment variables ###
 rawDir=`pwd`
-scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts"`
+scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts" | head -1`
 if [ ! kstagaman_bin ]; then 
 	ln -s /home2/stagaman/bin $scriptsDir/kstagaman_bin
 fi
