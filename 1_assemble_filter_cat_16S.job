@@ -27,14 +27,28 @@
 # batch_rename.sh
 # simple_fq2fa.pl
 
-###### Compress raw sequence files at the end ("yes" or "no")? ######
+###################### YOU CAN EDIT THE FOLLOWING VARIABLES ###################### 
+
+### Flash variables
+flash_minOverlap=20 
+flash_maxOverlap=150 # 247 min and max are what I used for PE250 reads of the V4 region, 20min, 150max for PE150 reads
+flash_mismatch=0.25 # increasing this leads to more assemblies made, but increases error rate
+
+### Quality filtering variables (fastq_quality_filter)
+qual_min=20
+qual_pct=95
+
+### Compress raw sequence files at the end ("yes" or "no")?
 compress_raw=no
+
+##################################################################################
+########### LEAVE THESE VARIABLES ALONE UNLESS SOMETHING'S NOT WORKING ###########
 
 ### Load Modules
 module load flash/1.2.7
 module load fastx_toolkit/0.0.13
 
-### Environment variables ###
+### Environment variables
 rawDir=`pwd`
 scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts" | head -1`
 if [ ! kstagaman_bin ]; then 
@@ -63,25 +77,14 @@ else
 	# exit
 	fi
 fi
-
-
-### Flash variables
-flash_minOverlap=20 
-flash_maxOverlap=150 # 247 min and max are what I used for PE250 reads of the V4 region, 20min, 150max for PE150 reads
-flash_mismatch=0.25 # increasing this leads to more assemblies made, but increases error rate
 flash_end=`expr ${#read1s[@]} - 1`
 flash_outDir=01_Flash_m${flash_minOverlap}M${flash_maxOverlap}
-
-### Quality filtering variables (fastq_quality_filter)
-qual_min=20
-qual_pct=95
 qual_outDir=02_Filtered_q${qual_min}p${qual_pct}
-
-### Concatenating variables (cat)
 concatName=all_smpls.joined.filt
 uniq_outDir=03_UniqSeq_files
 
 ##################################################################################
+######################### PROCESSING COMMANDS RUN BELOW ##########################
 
 ### Read assembly (flash)
 mkdir $flash_outDir
