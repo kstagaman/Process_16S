@@ -126,7 +126,9 @@ if [ $inclSngls == 'yes' ]; then
 fi
 
 ### Drop seqs that align to host genome
-total_seqs=`grep -c "^>" $concatName.fasta`
+seq_cts=(`grep -o "size=[0-9][0-9]*" $overThreshName.fasta | cut -f 2 -d '='`)
+last=$((${#seq_cts[@]} - 1))
+total_seqs=0; for i in `seq 0 $last`; do total_seqs=$(($total_seqs + ${seq_cts[$i]})); done
 if [ $runBowtie == 'yes' ]; then 
 	bowtie2 -f -x $bowtie_db -U $overThreshName.fasta -S $overThreshName.sam --un $overThreshName.noHost.fasta --al $overThreshName.wHost.fasta -p $bowtie_threads
 	echo -e "bowtie2 -f -x $bowtie_db -U $overThreshName.fasta -S $overThreshName.sam --un $overThreshName.noHost.fasta --al $overThreshName.wHost.fasta -p $bowtie_threads\n" >> $rawDir/$runName.log
