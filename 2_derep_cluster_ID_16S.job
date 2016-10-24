@@ -42,7 +42,6 @@ uniq_keep=2 # mininum number of identical sequences to keep unique read
 ### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")?
 runBowtie=yes
 bowtie_db=/home2/stagaman/Databases/Bowtie2/d_rerio_Zv9_MT   # zebrafish MT
-# bowtie_db=/research/bowtie_indexes/h_sapiens_37_asm # human
 # bowtie_db=/home14/steury/research/bowtie_indexes/SB_MT_1 # stickleback mtDNA
 bowtie_threads=1 # Using more than 1 thread causes bowtie to mess up the order of the unique sequences
                  # If you wish you use all threads available change to `grep -c "^processor" /proc/cpuinfo`
