@@ -51,6 +51,9 @@ bowtie_threads=1 # Using more than 1 thread causes bowtie to mess up the order o
 mafft_open=10  # these open and extend penalties are much higher than the default. I chose them because I've found that 
 mafft_extend=5 # if the resulting alignments are highly gapped, I probably did something wrong upstream, or the data is really bad.
 
+### RDP Classifier version (which version would you like to use (14016 or 160201)?)
+rdp_version=140616
+
 ##################################################################################
 ########### LEAVE THESE VARIABLES ALONE UNLESS SOMETHING'S NOT WORKING ###########
 
@@ -239,10 +242,10 @@ FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs
 echo -e "FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs.aln.fasta > all_smpls.otus.tree\n" >> $rawDir/$runName.log
 
 ### Taxon assignment (RDP classifier)
-java -Xmx1g -jar /usr/local/packages/RDPTools/140616/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp.txt
-echo -e "java -Xmx1g -jar /usr/local/packages/RDPTools/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp.txt\n" >> $rawDir/$runName.log
+java -Xmx1g -jar /usr/local/packages/RDPTools/$rdp_version/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp$rdp_version.txt
+echo -e "java -Xmx1g -jar /usr/local/packages/RDPTools/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp$rdp_version.txt\n" >> $rawDir/$runName.log
 
-$scriptsDir/rdp_tax2phyloseq_tax_nosupp.pl -i all_smpls.taxa_tbl.rdp.txt
-mv all_smpls.taxa_tbl.rdp.phyloseq.txt all_smpls.taxa_tbl.phyloseq.txt
+$scriptsDir/rdp_tax2phyloseq_tax_nosupp.pl -i all_smpls.taxa_tbl.rdp$rdp_version.txt
+# mv all_smpls.taxa_tbl.rdp.phyloseq.txt all_smpls.taxa_tbl.phyloseq.txt
 
 cd $rawDir
