@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Process 16s : A PBS-based pipeline for processing paired-end 16S amplicon Illumina reads">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Process 16s</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kstagaman/Process_16S">View on GitHub</a>
+
+          <h1 id="project_title">Process 16s</h1>
+          <h2 id="project_tagline">A PBS-based pipeline for processing paired-end 16S amplicon Illumina reads</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kstagaman/Process_16S/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kstagaman/Process_16S/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="readmemd" class="anchor" href="#readmemd" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>README.md</h1>
+
+<p>The directories in this repository contain a pipeline to process and analyze the 16S sequence data on the ACISS cluster at the University of Oregon. It should hopefully be easy to customize for use on other computers.</p>
+
+<h2>
+<a id="directories-and-scripts" class="anchor" href="#directories-and-scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directories and scripts</h2>
+
+<p>The scripts should be run in the following order. The input for these scripts is raw, demultiplexed 16S amplicon Illumina sequencing data in FastQ format. Auxilliary scripts called within the main scripts can be found in "Support_scripts"</p>
+
+<ul>
+<li>1_assemble_filter_cat_16S.job</li>
+<li>2_derep_cluster_ID_16S.job</li>
+</ul>
+
+<h2>
+<a id="other-required-programs" class="anchor" href="#other-required-programs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other required programs</h2>
+
+<p>Programs called by the scripts:</p>
+
+<ul>
+<li>flash/1.2.7</li>
+<li>fastx_toolkit/0.0.13</li>
+<li>bowtie/2.2.1</li>
+<li>usearch/7.0.1090 -OR- uclust/1.2.22</li>
+<li>mafft (v7.029b)</li>
+<li>fasttree/2.1.4</li>
+<li>RDPTools/140616</li>
+</ul>
+
+<h2>
+<a id="modular-scripts" class="anchor" href="#modular-scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modular scripts</h2>
+
+<p>Some users voiced an interest in being able to run each step of the pipeline individually to see the output. The Modular_scripts directory contains the exact same pipeline as the primary two scripts, but broken up in just such a fashion.</p>
+
+<p>Because many of the steps after the first few scripts take very little time to run, it may not be necessary or even expedient to submit them as jobs. Therefore, all of these scripts can also be run as shell scripts within the raw reads directory (the same directory supplied to the <code>-d</code> PBS flag.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Process 16s maintained by <a href="https://github.com/kstagaman">kstagaman</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
