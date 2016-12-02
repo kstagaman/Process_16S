@@ -41,8 +41,11 @@ uniq_keep=2 # mininum number of identical sequences to keep unique read
 
 ### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")?
 runBowtie=yes
-bowtie_db=/home2/stagaman/Databases/Bowtie2/d_rerio_Zv9_MT   # zebrafish MT
-# bowtie_db=/home14/steury/research/bowtie_indexes/mtDNA_indexes/SB_mtDNA # stickleback mtDNA
+bowtie_ver=2 # or 1
+bowtie_db=/home2/stagaman/Databases/Bowtie2/d_rerio_Zv9_MT   # bowtie2 zebrafish MT
+# bowtie_db=/home14/steury/research/bowtie_indexes/mtDNA_indexes/SB_mtDNA # bowtie2 stickleback mtDNA
+# bowtie_db=/research/bowtie_indexes/d_rerio_ZV9_62   # bowtie version 1 zebrafish
+
 bowtie_threads=1 # Using more than 1 thread causes bowtie to mess up the order of the unique sequences
                  # If you wish you use all threads available change to `grep -c "^processor" /proc/cpuinfo`
                  # If you do this, you need to add a line after the bowtie command to reorder sequences by abundance
@@ -52,7 +55,7 @@ mafft_open=10  # these open and extend penalties are much higher than the defaul
 mafft_extend=5 # if the resulting alignments are highly gapped, I probably did something wrong upstream, or the data is really bad.
 
 ### RDP Classifier version (which version would you like to use (14016 or 160201)?)
-rdp_version=140616
+rdp_version=140616 # or 160201
 
 ##################################################################################
 ########### LEAVE THESE VARIABLES ALONE UNLESS SOMETHING'S NOT WORKING ###########
@@ -133,24 +136,46 @@ seq_cts=(`grep -o "size=[0-9][0-9]*" $overThreshName.fasta | cut -f 2 -d '='`)
 last=$((${#seq_cts[@]} - 1))
 total_seqs=0; for i in `seq 0 $last`; do total_seqs=$(($total_seqs + ${seq_cts[$i]})); done
 if [ $runBowtie == 'yes' ]; then 
-	bowtie2 -f -x $bowtie_db -U $overThreshName.fasta -S $overThreshName.sam --un $overThreshName.noHost.fasta --al $overThreshName.wHost.fasta -p $bowtie_threads
-	echo -e "bowtie2 -f -x $bowtie_db -U $overThreshName.fasta -S $overThreshName.sam --un $overThreshName.noHost.fasta --al $overThreshName.wHost.fasta -p $bowtie_threads\n" >> $rawDir/$runName.log
-	deHostOverName=$overThreshName.noHost
-	hostSeq_cts=(`grep -o "size=[0-9][0-9]*" $overThreshName.wHost.fasta | cut -f 2 -d '='`)
-	last=$((${#hostSeq_cts[@]} - 1))
-	total_host=0; for i in `seq 0 $last`; do total_host=$(($total_host + ${hostSeq_cts[$i]})); done
-	frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
-	echo -e "fraction of seqs over keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
-
-	if [ $inclSngls == 'yes' ]; then 
-		bowtie2 -f -x $bowtie_db -U $underThreshName.fasta -S $underThreshName.sam --un $underThreshName.noHost.fasta --al $underThreshName.wHost.fasta -p $bowtie_threads
-		echo -e "bowtie2 -f -x $bowtie_db -U $underThreshName.fasta -S $underThreshName.sam --un $underThreshName.noHost.fasta --al $underThreshName.wHost.fasta -p $bowtie_threads" >> $rawDir/$runName.log
-		deHostUnderName=$underThreshName.noHost
-		hostSeq_cts=(`grep -o "size=[0-9][0-9]*" $underThreshName.wHost.fasta | cut -f 2 -d '='`)
+	if [ $bowtie_ver -eq 1 ]; then
+		bowtie -f -p $bowtie_threads $bowtie_db $overThreshName.fasta --un $overThreshName.noHost.fasta
+		echo -e "bowtie -f -p $bowtie_threads $bowtie_db $overThreshName.fasta --un $overThreshName.noHost.fasta\n" >> $rawDir/$runName.log
+		deHostOverName=$overThreshName.noHost
+		hostSeq_cts=(`grep -o "size=[0-9][0-9]*" $overThreshName.wHost.fasta | cut -f 2 -d '='`)
 		last=$((${#hostSeq_cts[@]} - 1))
 		total_host=0; for i in `seq 0 $last`; do total_host=$(($total_host + ${hostSeq_cts[$i]})); done
 		frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
-		echo -e "fraction of seqs under keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
+		echo -e "fraction of seqs over keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
+
+		if [ $inclSngls == 'yes' ]; then 
+			bowtie -f -p $bowtie_threads $bowtie_db $underThreshName.fasta --un $underThreshName.noHost.fasta
+			echo -e "bowtie -f -p $bowtie_threads $bowtie_db $underThreshName.fasta --un $underThreshName.noHost.fasta\n" >> $rawDir/$runName.log
+			deHostUnderName=$underThreshName.noHost
+			hostSeq_cts=(`grep -o "size=[0-9][0-9]*" $underThreshName.wHost.fasta | cut -f 2 -d '='`)
+			last=$((${#hostSeq_cts[@]} - 1))
+			total_host=0; for i in `seq 0 $last`; do total_host=$(($total_host + ${hostSeq_cts[$i]})); done
+			frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
+			echo -e "fraction of seqs under keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
+		fi
+	else
+		bowtie2 -f -x $bowtie_db -U $overThreshName.fasta -S $overThreshName.sam --un $overThreshName.noHost.fasta --al $overThreshName.wHost.fasta -p $bowtie_threads
+		echo -e "bowtie2 -f -x $bowtie_db -U $overThreshName.fasta -S $overThreshName.sam --un $overThreshName.noHost.fasta --al $overThreshName.wHost.fasta -p $bowtie_threads\n" >> $rawDir/$runName.log
+		deHostOverName=$overThreshName.noHost
+		hostSeq_cts=(`grep -o "size=[0-9][0-9]*" $overThreshName.wHost.fasta | cut -f 2 -d '='`)
+		last=$((${#hostSeq_cts[@]} - 1))
+		total_host=0; for i in `seq 0 $last`; do total_host=$(($total_host + ${hostSeq_cts[$i]})); done
+		frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
+		echo -e "fraction of seqs over keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
+
+		if [ $inclSngls == 'yes' ]; then 
+			bowtie2 -f -x $bowtie_db -U $underThreshName.fasta -S $underThreshName.sam --un $underThreshName.noHost.fasta --al $underThreshName.wHost.fasta -p $bowtie_threads
+			echo -e "bowtie2 -f -x $bowtie_db -U $underThreshName.fasta -S $underThreshName.sam --un $underThreshName.noHost.fasta --al $underThreshName.wHost.fasta -p $bowtie_threads" >> $rawDir/$runName.log
+			deHostUnderName=$underThreshName.noHost
+			hostSeq_cts=(`grep -o "size=[0-9][0-9]*" $underThreshName.wHost.fasta | cut -f 2 -d '='`)
+			last=$((${#hostSeq_cts[@]} - 1))
+			total_host=0; for i in `seq 0 $last`; do total_host=$(($total_host + ${hostSeq_cts[$i]})); done
+			frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
+			echo -e "fraction of seqs under keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
+		fi
 	fi
 else 
 	deHostOverName=$overThreshName
