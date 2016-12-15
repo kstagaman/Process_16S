@@ -107,7 +107,7 @@ fasttree_log=$rawDir/${runName}_fasttree.log
 ######################### PROCESSING COMMANDS RUN BELOW ##########################
 
 ### Dereplicate unique reads (uniq_16S.pl) &
-### Drop unique reads with abundance lowere than $uniq_keep
+### Drop unique reads with abundance lower than $uniq_keep
 cd $rawDir/$uniq_outDir
 if [ $clusterTool == 'usearch' ]; then 
 	if [ $inclSngls == 'yes' ]; then 
@@ -192,7 +192,7 @@ if [ $clusterTool == 'usearch' ]; then
 	-otus $cluster_outDir/$deHostOverName.seeds.fasta \
 	-uc $cluster_outDir/$deHostOverName.clustered.uc \
 	-sizein -otu_radius_pct $cluster_dist
-	echo -e "usearch -cluster_otus $uniq_outDir/$deHostOverName.fasta -otus $cluster_outDir/$deHostOverName.seeds.fasta -uparseout $cluster_outDir/$deHostOverName.clustered.up -sizein -relabel OTU\n" >> $rawDir/$runName.log
+	echo -e "usearch -cluster_otus $uniq_outDir/$deHostOverName.fasta -otus $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostOverName.clustered.uc -sizein -otu_radius_pct $cluster_dist\n" >> $rawDir/$runName.log
 
 	if [ $inclSngls == 'yes' ]; then 
 		usearch \
