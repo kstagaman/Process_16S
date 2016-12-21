@@ -23,6 +23,7 @@
 # mafft (v7.029b)
 # fasttree/2.1.4
 # RDPTools/140616
+# bc/1.06.95
 # uniq_16S.pl
 # usearch7_relabel_otus.pl
 # build_otu_table.pl
@@ -32,7 +33,7 @@
 ###################### YOU CAN EDIT THE FOLLOWING VARIABLES ######################
 
 ### Which clustering tool would you like to use?
-clusterTool=usearch
+clusterTool=vsearch
 cluster_dist=3
 #
 ### Include singletons by matching them back to clusters formed without them ("yes" or "no")?
@@ -40,7 +41,7 @@ inclSngls=no
 uniq_keep=2 # mininum number of identical sequences to keep unique read
 
 ### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")?
-runBowtie=yes
+runBowtie=no
 bowtie_ver=2 # or 1
 bowtie_db=/home2/stagaman/Databases/Bowtie2/d_rerio_Zv9_MT   # bowtie2 zebrafish MT
 # bowtie_db=/home14/steury/research/bowtie_indexes/mtDNA_indexes/SB_mtDNA # bowtie2 stickleback mtDNA
@@ -59,7 +60,6 @@ rdp_version=140616 # or 160201
 
 ##################################################################################
 ########### LEAVE THESE VARIABLES ALONE UNLESS SOMETHING'S NOT WORKING ###########
-
 ### Load Modules
 if [ $runBowtie == "yes" ]; then
 	module load bowtie/2.2.9
@@ -206,7 +206,7 @@ if [ $clusterTool == 'usearch' ]; then
 		-sizein -strand plus -id $pct_id
 		echo -e "usearch -usearch_global $uniq_outDir/$deHostUnderName.fasta -db $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostUnderName.clustered.uc -sizein -strand plus -id $pct_id\n" >> $rawDir/$runName.log
 	fi
-if [ $clusterTool == 'uclust' ]; then
+elif [ $clusterTool == 'uclust' ]; then
 	uclust \
 	--input $uniq_outDir/$deHostOverName.fasta \
 	--uc $cluster_outDir/$deHostOverName.clustered.uc \
@@ -228,8 +228,8 @@ if [ $clusterTool == 'uclust' ]; then
 		--libonly --usersort --trunclabels --id $pct_id
 		echo -e "uclust --input $uniq_outDir/$deHostUnderName.fasta --lib $cluster_outDir/$deHostOverName.seeds.fasta --uc $cluster_outDir/$deHostUnderName.clustered.uc --usersort --trunclabels --id $pct_id\n" >> $rawDir/$runName.log
 	fi
-fi
-if [ $clusterTool == 'vsearch' ]; then
+elif [ $clusterTool == 'vsearch' ]; then
+	echo -e "using vsearch to cluster...\n" >> $rawDir/$runName.log
 	vsearch \
 	-cluster_fast $uniq_outDir/$deHostOverName.fasta \
 	-centroids $cluster_outDir/$deHostOverName.seeds.fasta \
@@ -245,6 +245,7 @@ if [ $clusterTool == 'vsearch' ]; then
 		-sizein -strand plus -id $pct_id
 		echo -e "usearch -usearch_global $uniq_outDir/$deHostUnderName.fasta -db $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostUnderName.clustered.uc -sizein -strand plus -id $pct_id\n" >> $rawDir/$runName.log
 	fi
+fi
 
 ### Cleanup
 comboName=$concatName.uniq.allSize.noHost
@@ -256,7 +257,7 @@ if [ $inclSngls == 'yes' ]; then
 	cat $uniq_outDir/$concatName.uniq_lte${gt}_map.txt >> $uniq_outDir/$concatName.uniq_allSize_map.txt
 fi
 
-if [ $clusterTool == 'usearch' ]; then
+if [ $clusterTool == 'usearch' ] || [ $clusterTool == 'vsearch' ]; then
 	$scriptsDir/join_multi-lined_fasta.pl $cluster_outDir/$deHostOverName.seeds.fasta
 	mv $cluster_outDir/$deHostOverName.seeds.fasta.joined $cluster_outDir/$deHostOverName.seeds.fasta
 	$scriptsDir/usearch7_relabel_otus.pl -i $cluster_outDir/$deHostOverName.seeds.fasta
@@ -275,7 +276,7 @@ mv $final_outDir/$comboName.clustered.otu_tbl.txt $final_outDir/all_smpls.otu_tb
 ### Alignment (mafft)
 cd $rawDir/$cluster_outDir
 $mafftDir/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta
-echo -e "$scriptsDir/kstagaman_bin/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta\n" >> $rawDir/$runName.log
+echo -e "$mafftDir/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta\n" >> $rawDir/$runName.log
 
 ### Cleanup
 cd $rawDir/$final_outDir
@@ -287,10 +288,10 @@ FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs
 echo -e "FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs.aln.fasta > all_smpls.otus.tree\n" >> $rawDir/$runName.log
 
 ### Taxon assignment (RDP classifier)
+# note if not running on ACISS you may need to replace the path to classifier.jar
 java -Xmx1g -jar /usr/local/packages/RDPTools/$rdp_version/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp$rdp_version.txt
 echo -e "java -Xmx1g -jar /usr/local/packages/RDPTools/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp$rdp_version.txt\n" >> $rawDir/$runName.log
 
 $scriptsDir/rdp_tax2phyloseq_tax_nosupp.pl -i all_smpls.taxa_tbl.rdp$rdp_version.txt
-# mv all_smpls.taxa_tbl.rdp.phyloseq.txt all_smpls.taxa_tbl.phyloseq.txt
 
 cd $rawDir
