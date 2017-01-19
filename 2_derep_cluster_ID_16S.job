@@ -3,13 +3,13 @@
 
 ### Queuing variables
 # (The d flag is always the raw reads directory)
-#PBS -N 
-#PBS -d 
+#PBS -N
+#PBS -d
 #PBS -q fatnodes
 
 #PBS -k oe
 #PBS -m ae
-#PBS -M 
+#PBS -M
 
 ### Use the script to dereplicate, cluster OTUs, and identitfy from 16S sequences.
 ### This script requires you to have run 1_assemble_filter_cat_16S.job on this same data
@@ -19,10 +19,11 @@
 
 ### Auxillary scripts and programs
 # bowtie/2.2.1
-# usearch/7.0.1090 -OR- uclust/1.2.22
+# usearch/7.0.1090 -OR- uclust/1.2.22 -OR- vsearch/1.1.3
 # mafft (v7.029b)
 # fasttree/2.1.4
 # RDPTools/140616
+# bc/1.06.95
 # uniq_16S.pl
 # usearch7_relabel_otus.pl
 # build_otu_table.pl
@@ -32,7 +33,7 @@
 ###################### YOU CAN EDIT THE FOLLOWING VARIABLES ######################
 
 ### Which clustering tool would you like to use?
-clusterTool=usearch
+clusterTool=vsearch
 cluster_dist=3
 #
 ### Include singletons by matching them back to clusters formed without them ("yes" or "no")?
@@ -40,7 +41,7 @@ inclSngls=no
 uniq_keep=2 # mininum number of identical sequences to keep unique read
 
 ### Do you want to run bowtie to remove host-matching sequences ("yes" or "no")?
-runBowtie=yes
+runBowtie=no
 bowtie_ver=2 # or 1
 bowtie_db=/home2/stagaman/Databases/Bowtie2/d_rerio_Zv9_MT   # bowtie2 zebrafish MT
 # bowtie_db=/home14/steury/research/bowtie_indexes/mtDNA_indexes/SB_mtDNA # bowtie2 stickleback mtDNA
@@ -51,7 +52,7 @@ bowtie_threads=1 # Using more than 1 thread causes bowtie to mess up the order o
                  # If you do this, you need to add a line after the bowtie command to reorder sequences by abundance
 
 ### Alignment parameters
-mafft_open=10  # these open and extend penalties are much higher than the default. I chose them because I've found that 
+mafft_open=10  # these open and extend penalties are much higher than the default. I chose them because I've found that
 mafft_extend=5 # if the resulting alignments are highly gapped, I probably did something wrong upstream, or the data is really bad.
 
 ### RDP Classifier version (which version would you like to use (14016 or 160201)?)
@@ -59,16 +60,17 @@ rdp_version=140616 # or 160201
 
 ##################################################################################
 ########### LEAVE THESE VARIABLES ALONE UNLESS SOMETHING'S NOT WORKING ###########
-
 ### Load Modules
-if [ $runBowtie == "yes" ]; then 
+if [ $runBowtie == "yes" ]; then
 	module load bowtie/2.2.9
 fi
-if [ $clusterTool == 'usearch' ]; then 
+if [ $clusterTool == 'usearch' ]; then
 	module load usearch/7.0.1090          # usearch/8.0 won't work with data > 4Gb because we only have the 32-bit version
-elif [ $clusterTool == 'uclust' ]; then 
+elif [ $clusterTool == 'uclust' ]; then
 	module load uclust/1.2.22
-else 
+elif [ $clusterTool == 'vsearch' ]; then
+	module load vsearch/1.1.3
+else
 	exit
 fi
 module load fasttree/2.1.4
@@ -77,7 +79,7 @@ module load RDPTools/140616
 ### Environment variables
 rawDir=`pwd`
 scriptsDir=`find $HOME -path "*/Process_16S/Support_scripts" | head -1`
-if [ ! -d "$scriptsDir/kstagaman_bin" ]; then 
+if [ ! -d "$scriptsDir/kstagaman_bin" ]; then
 	ln -s /home2/stagaman/bin $scriptsDir/kstagaman_bin
 fi
 today=(`date`)
@@ -92,10 +94,12 @@ echo "uniq_keep=$uniq_keep" >> $rawDir/$runName.log
 gt=`expr $uniq_keep - 1` # for file naming purposes
 pct_id=`printf "%.2f\n" $(bc <<< "scale = 2; (100 - $cluster_dist)/100")`
 echo -e "cluster_dist=$cluster_dist\npct_id=$pct_id" >> $rawDir/$runName.log
-if [ $clusterTool == 'usearch' ]; then 
+if [ $clusterTool == 'usearch' ]; then
 	cluster_outDir=04_Usearch_dist$cluster_dist
-else 
+elif [ $clusterTool == 'uclust' ]; then
 	cluster_outDir=04_Uclust_id${pct_id}
+elif [ $clusterTool == 'vsearch' ]; then
+	cluster_outDir=04_Vsearch_dist$cluster_dist
 fi
 final_outDir=00_Final_output
 mafftDir=$scriptsDir/kstagaman_bin # if mafft is not being run on ACISS, this needs to point to the correct directory containing mafft
@@ -109,25 +113,25 @@ fasttree_log=$rawDir/${runName}_fasttree.log
 ### Dereplicate unique reads (uniq_16S.pl) &
 ### Drop unique reads with abundance lower than $uniq_keep
 cd $rawDir/$uniq_outDir
-if [ $clusterTool == 'usearch' ]; then 
-	if [ $inclSngls == 'yes' ]; then 
+if [ $clusterTool == 'usearch' ] || [ $clusterTool == 'vsearch' ]; then
+	if [ $inclSngls == 'yes' ]; then
 		$scriptsDir/uniq_16S.pl -s -u -i $concatName.fasta -k $uniq_keep
 		echo -e "$scriptsDir/uniq_16S.pl -s -u -i $concatName.fasta -k $uniq_keep\n" >> $rawDir/$runName.log
-	else 
+	else
 		$scriptsDir/uniq_16S.pl -s -i $concatName.fasta -k $uniq_keep
 		echo -e "$scriptsDir/uniq_16S.pl -s -i $concatName.fasta -k $uniq_keep\n" >> $rawDir/$runName.log
 	fi
-else 
-	if [ $inclSngls == 'yes' ]; then 
+else
+	if [ $inclSngls == 'yes' ]; then
 		$scriptsDir/uniq_16S.pl -u -i $concatName.fasta -k $uniq_keep # difference is -s flag not present, which adds ;size= for usearch to headers
 		echo -e "$scriptsDir/uniq_16S.pl -u -i $concatName.fasta -k $uniq_keep\n" >> $rawDir/$runName.log
-	else 
+	else
 		$scriptsDir/uniq_16S.pl -i $concatName.fasta -k $uniq_keep # difference is -s flag not present, which adds ;size= for usearch to headers
 		echo -e "$scriptsDir/uniq_16S.pl -i $concatName.fasta -k $uniq_keep\n" >> $rawDir/$runName.log
 	fi
 fi
 overThreshName=`echo all_smpls*gt${gt}*.fasta | rev | cut -d '.' -f 2- | rev`
-if [ $inclSngls == 'yes' ]; then 
+if [ $inclSngls == 'yes' ]; then
 	underThreshName=`echo all_smpls*lte${gt}*.fasta | rev | cut -d '.' -f 2- | rev`
 fi
 
@@ -135,7 +139,7 @@ fi
 seq_cts=(`grep -o "size=[0-9][0-9]*" $overThreshName.fasta | cut -f 2 -d '='`)
 last=$((${#seq_cts[@]} - 1))
 total_seqs=0; for i in `seq 0 $last`; do total_seqs=$(($total_seqs + ${seq_cts[$i]})); done
-if [ $runBowtie == 'yes' ]; then 
+if [ $runBowtie == 'yes' ]; then
 	if [ $bowtie_ver -eq 1 ]; then
 		bowtie -f -p $bowtie_threads $bowtie_db $overThreshName.fasta --un $overThreshName.noHost.fasta
 		echo -e "bowtie -f -p $bowtie_threads $bowtie_db $overThreshName.fasta --un $overThreshName.noHost.fasta\n" >> $rawDir/$runName.log
@@ -146,7 +150,7 @@ if [ $runBowtie == 'yes' ]; then
 		frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
 		echo -e "fraction of seqs over keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
 
-		if [ $inclSngls == 'yes' ]; then 
+		if [ $inclSngls == 'yes' ]; then
 			bowtie -f -p $bowtie_threads $bowtie_db $underThreshName.fasta --un $underThreshName.noHost.fasta
 			echo -e "bowtie -f -p $bowtie_threads $bowtie_db $underThreshName.fasta --un $underThreshName.noHost.fasta\n" >> $rawDir/$runName.log
 			deHostUnderName=$underThreshName.noHost
@@ -166,7 +170,7 @@ if [ $runBowtie == 'yes' ]; then
 		frac_host=`bc <<< "scale=5; $total_host/$total_seqs"`
 		echo -e "fraction of seqs over keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
 
-		if [ $inclSngls == 'yes' ]; then 
+		if [ $inclSngls == 'yes' ]; then
 			bowtie2 -f -x $bowtie_db -U $underThreshName.fasta -S $underThreshName.sam --un $underThreshName.noHost.fasta --al $underThreshName.wHost.fasta -p $bowtie_threads
 			echo -e "bowtie2 -f -x $bowtie_db -U $underThreshName.fasta -S $underThreshName.sam --un $underThreshName.noHost.fasta --al $underThreshName.wHost.fasta -p $bowtie_threads" >> $rawDir/$runName.log
 			deHostUnderName=$underThreshName.noHost
@@ -177,7 +181,7 @@ if [ $runBowtie == 'yes' ]; then
 			echo -e "fraction of seqs under keep threshold that match host: $frac_host\n" >> $rawDir/$runName.log
 		fi
 	fi
-else 
+else
 	deHostOverName=$overThreshName
 	deHostUnderName=$underThreshName
 fi
@@ -186,7 +190,7 @@ fi
 cd $rawDir
 mkdir $rawDir/$cluster_outDir
 
-if [ $clusterTool == 'usearch' ]; then 
+if [ $clusterTool == 'usearch' ]; then
 	usearch \
 	-cluster_otus $uniq_outDir/$deHostOverName.fasta \
 	-otus $cluster_outDir/$deHostOverName.seeds.fasta \
@@ -194,7 +198,7 @@ if [ $clusterTool == 'usearch' ]; then
 	-sizein -otu_radius_pct $cluster_dist
 	echo -e "usearch -cluster_otus $uniq_outDir/$deHostOverName.fasta -otus $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostOverName.clustered.uc -sizein -otu_radius_pct $cluster_dist\n" >> $rawDir/$runName.log
 
-	if [ $inclSngls == 'yes' ]; then 
+	if [ $inclSngls == 'yes' ]; then
 		usearch \
 		-usearch_global $uniq_outDir/$deHostUnderName.fasta \
 		-db $cluster_outDir/$deHostOverName.seeds.fasta \
@@ -202,11 +206,11 @@ if [ $clusterTool == 'usearch' ]; then
 		-sizein -strand plus -id $pct_id
 		echo -e "usearch -usearch_global $uniq_outDir/$deHostUnderName.fasta -db $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostUnderName.clustered.uc -sizein -strand plus -id $pct_id\n" >> $rawDir/$runName.log
 	fi
-else 
+elif [ $clusterTool == 'uclust' ]; then
 	uclust \
 	--input $uniq_outDir/$deHostOverName.fasta \
 	--uc $cluster_outDir/$deHostOverName.clustered.uc \
-	--usersort --trunclabels --id $pct_id 
+	--usersort --trunclabels --id $pct_id
 	echo -e "uclust --input $cluster_outDir/$deHostOverName.fasta --uc $cluster_outDir/$deHostOverName.clustered.uc --usersort --trunclabels --id $pct_id\n" >> $rawDir/$runName.log
 
 	uclust \
@@ -216,13 +220,30 @@ else
 	--types S --trunclabels
 	echo -e "uclust --uc2fasta $cluster_outDir/$deHostOverName.clustered.uc --types S --input $uniq_outDir/$deHostOverName.fasta --output $cluster_outDir/$deHostOverName.seeds.fasta --trunclabels\n" >> $rawDir/$runName.log
 
-	if [ $inclSngls == 'yes' ]; then 
+	if [ $inclSngls == 'yes' ]; then
 		uclust \
 		--input $uniq_outDir/$deHostUnderName.fasta \
 		--lib $cluster_outDir/$deHostOverName.seeds.fasta \
 		--uc $cluster_outDir/$deHostUnderName.clustered.uc \
 		--libonly --usersort --trunclabels --id $pct_id
 		echo -e "uclust --input $uniq_outDir/$deHostUnderName.fasta --lib $cluster_outDir/$deHostOverName.seeds.fasta --uc $cluster_outDir/$deHostUnderName.clustered.uc --usersort --trunclabels --id $pct_id\n" >> $rawDir/$runName.log
+	fi
+elif [ $clusterTool == 'vsearch' ]; then
+	echo -e "using vsearch to cluster...\n" >> $rawDir/$runName.log
+	vsearch \
+	-cluster_fast $uniq_outDir/$deHostOverName.fasta \
+	-centroids $cluster_outDir/$deHostOverName.seeds.fasta \
+	-uc $cluster_outDir/$deHostOverName.clustered.uc \
+	-sizein -id $pct_id
+	echo -e "vsearch -cluster_fast $uniq_outDir/$deHostOverName.fasta -centroids $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostOverName.clustered.up -sizein \n" >> $rawDir/$runName.log
+
+	if [ $inclSngls == 'yes' ]; then
+		vsearch \
+		-usearch_global $uniq_outDir/$deHostUnderName.fasta \
+		-db $cluster_outDir/$deHostOverName.seeds.fasta \
+		-uc $cluster_outDir/$deHostUnderName.clustered.uc \
+		-sizein -strand plus -id $pct_id
+		echo -e "usearch -usearch_global $uniq_outDir/$deHostUnderName.fasta -db $cluster_outDir/$deHostOverName.seeds.fasta -uc $cluster_outDir/$deHostUnderName.clustered.uc -sizein -strand plus -id $pct_id\n" >> $rawDir/$runName.log
 	fi
 fi
 
@@ -231,17 +252,17 @@ comboName=$concatName.uniq.allSize.noHost
 grep "^[SH]" $cluster_outDir/$deHostOverName.clustered.uc > $cluster_outDir/$comboName.clustered.uc
 cat $uniq_outDir/$concatName.uniq_gt${gt}_map.txt > $uniq_outDir/$concatName.uniq_allSize_map.txt
 
-if [ $inclSngls == 'yes' ]; then 
+if [ $inclSngls == 'yes' ]; then
 	grep "^[SH]" $cluster_outDir/$deHostUnderName.clustered.uc >> $cluster_outDir/$comboName.clustered.uc
 	cat $uniq_outDir/$concatName.uniq_lte${gt}_map.txt >> $uniq_outDir/$concatName.uniq_allSize_map.txt
 fi
 
-if [ $clusterTool == 'usearch' ]; then 
+if [ $clusterTool == 'usearch' ] || [ $clusterTool == 'vsearch' ]; then
 	$scriptsDir/join_multi-lined_fasta.pl $cluster_outDir/$deHostOverName.seeds.fasta
 	mv $cluster_outDir/$deHostOverName.seeds.fasta.joined $cluster_outDir/$deHostOverName.seeds.fasta
 	$scriptsDir/usearch7_relabel_otus.pl -i $cluster_outDir/$deHostOverName.seeds.fasta
 	mv $cluster_outDir/$deHostOverName.seeds.relabelled.fasta $cluster_outDir/$deHostOverName.seeds.fasta
-else 
+else
 	sed "s/^>\([0-9][0-9]*\).*/>OTU\1/g" $cluster_outDir/$deHostOverName.seeds.fasta > $cluster_outDir/$deHostOverName.seeds.fasta.edited
 	mv $cluster_outDir/$deHostOverName.seeds.fasta.edited $cluster_outDir/$deHostOverName.seeds.fasta
 fi
@@ -255,7 +276,7 @@ mv $final_outDir/$comboName.clustered.otu_tbl.txt $final_outDir/all_smpls.otu_tb
 ### Alignment (mafft)
 cd $rawDir/$cluster_outDir
 $mafftDir/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta
-echo -e "$scriptsDir/kstagaman_bin/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta\n" >> $rawDir/$runName.log
+echo -e "$mafftDir/mafft --auto --op $mafft_open --ep $mafft_extend --thread $mafft_threads $deHostOverName.seeds.fasta > $rawDir/$final_outDir/all_smpls.otu_seqs.aln.fasta\n" >> $rawDir/$runName.log
 
 ### Cleanup
 cd $rawDir/$final_outDir
@@ -267,10 +288,10 @@ FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs
 echo -e "FastTree -nt -nosupport -quote -gtr -gamma -log $fasttree_log all_smpls.otu_seqs.aln.fasta > all_smpls.otus.tree\n" >> $rawDir/$runName.log
 
 ### Taxon assignment (RDP classifier)
+# note if not running on ACISS you may need to replace the path to classifier.jar
 java -Xmx1g -jar /usr/local/packages/RDPTools/$rdp_version/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp$rdp_version.txt
 echo -e "java -Xmx1g -jar /usr/local/packages/RDPTools/classifier.jar classify all_smpls.otu_seqs.aln.fasta -o all_smpls.taxa_tbl.rdp$rdp_version.txt\n" >> $rawDir/$runName.log
 
 $scriptsDir/rdp_tax2phyloseq_tax_nosupp.pl -i all_smpls.taxa_tbl.rdp$rdp_version.txt
-# mv all_smpls.taxa_tbl.rdp.phyloseq.txt all_smpls.taxa_tbl.phyloseq.txt
 
 cd $rawDir
