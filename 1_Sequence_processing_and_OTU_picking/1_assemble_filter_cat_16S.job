@@ -4,9 +4,15 @@
 ### Use the script to assemble, quality filter, and concatenate paired-end illumina 16S sequences. 
 # This script requires that the sequences have been demultiplexed and 
 # each sample file pair has the following format: 
-#     sample_name-R1.fastq.gz
-#     sample_name-R2.fastq.gz 
+#     sample_name-R1.fastq
+#     sample_name-R2.fastq 
 #     (where sample_name is the sample ID not containing any -'s or .'s)
+
+### Auxillary scripts and programs
+# flash
+# fastx_toolkit
+# seqtk
+# batch_rename.sh
 
 ###################### YOU CAN EDIT THE FOLLOWING VARIABLES ###################### 
 rawDir=/ssd/stagamak_tmp/Practice_16S
@@ -24,14 +30,16 @@ qual_pct=95
 
 ##################################################################################
 ########### LEAVE THESE VARIABLES ALONE UNLESS SOMETHING'S NOT WORKING ###########
+cd $rawDir
 
 ### Environment variables
 # # Many of the tools are installed locally in Keaton's home directory
 # # To make sure you're using the right tools, add the following directory to you path
 # # either by running the following command or by adding it to your .bash_profile/.bashrc
-# export PATH=/home/micro/stagamak/bin
+# export PATH=/home/micro/stagamak/bin:$PATH
 today=(`date`)
 runName=`echo "process_16S_${today[2]}${today[1]}${today[5]}"`
+echo "1_assemble_filter_cat_16.job" >> $rawDir/$runName.log
 echo "rawDir=$rawDir" >> $rawDir/$runName.log
 echo "scriptsDir=$scriptsDir" >> $rawDir/$runName.log
 read1s=(`ls *-R1.fastq.gz`) # this makes a list of the appropriate read1 files
